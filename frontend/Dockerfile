@@ -1,5 +1,5 @@
 # =============================================================================
-# Stage 1: Dependencies — instala dependências
+# Stage 1: Dependencies — instala dependências 
 # =============================================================================
 FROM node:20-alpine AS deps
 RUN apk add --no-cache libc6-compat

@@ -1,5 +1,5 @@
 # =============================================================================
-# Pipeline do Frontend — Lint → Test → Build → Push
+# Pipeline do Frontend — Lint → Test → Build → Push 
 # =============================================================================
 name: Frontend CI
 

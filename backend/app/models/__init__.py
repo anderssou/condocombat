@@ -1,3 +1,4 @@
+from __future__ import annotations
 from app.database import Base
 from app.models.condominio import Condominio
 from app.models.apartamento import Apartamento

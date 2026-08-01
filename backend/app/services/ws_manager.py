@@ -1,11 +1,11 @@
 """WebSocket connection manager with broadcast and heartbeat."""
-
 import asyncio
 import logging
 import time
 from dataclasses import dataclass, field
 
 from fastapi import WebSocket
+from fastapi.websockets import WebSocketDisconnect
 
 from app.schemas.ws_message import EventType, WSMessage
 
@@ -76,7 +76,7 @@ class WSConnectionManager:
         for ws in self._connections:
             try:
                 await ws.send_json(payload)
-            except Exception:
+            except (WebSocketDisconnect, RuntimeError, ConnectionResetError, OSError):
                 disconnected.append(ws)
         for ws in disconnected:
             self.disconnect(ws)
@@ -88,7 +88,7 @@ class WSConnectionManager:
         payload = message.model_dump(mode="json")
         try:
             await websocket.send_json(payload)
-        except Exception:
+        except (WebSocketDisconnect, RuntimeError, ConnectionResetError, OSError):
             self.disconnect(websocket)
 
     async def _heartbeat_loop(self, websocket: WebSocket) -> None:
@@ -106,7 +106,7 @@ class WSConnectionManager:
                 ping = WSMessage(type=EventType.PING)
                 try:
                     await websocket.send_json(ping.model_dump(mode="json"))
-                except Exception:
+                except (WebSocketDisconnect, RuntimeError, ConnectionResetError, OSError):
                     self.disconnect(websocket)
                     break
 

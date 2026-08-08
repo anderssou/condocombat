@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "condocombat-api"
 version = "0.1.0"
@@ -28,6 +32,18 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["__tests__"]
+
+[tool.setuptools.packages.find]
+# Empacota apenas o pacote `app` (e seus subpacotes). Sem isso, o setuptools
+# encontra `app/` e `alembic/` como dois pacotes "top-level" candidatos e
+# recusa o build por ambiguidade (erro de "flat-layout").
+include = ["app*"]
+
+[tool.ruff.lint.flake8-bugbear]
+# O padrão de injeção de dependência do FastAPI (Depends(...) como valor
+# default) é seguro e recomendado pela própria documentação do FastAPI.
+# Isso diz ao Ruff para não marcar B008 nesses casos específicos.
+extend-immutable-calls = ["fastapi.Depends", "fastapi.params.Depends"]
 
 [dependency-groups]
 dev = [

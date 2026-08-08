@@ -31,5 +31,5 @@ class Morador(Base):
     )
 
     apartamento: Mapped["Apartamento"] = relationship(
-        "Apartamento", back_populates="moradores"
+        "Apartamento", back_populates="moradores", lazy="selectin"
     )

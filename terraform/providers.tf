@@ -2,6 +2,13 @@ terraform {
   # Requer a versão mais recente do Terraform (1.10.x ou superior)
   required_version = ">= 1.10.0"
 
+    cloud {
+      organization = "SEU-ORG-AQUI"
+    workspaces {
+      name = "condocombat"
+    }
+  }
+
   required_providers {
     supabase = {
       source  = "supabase/supabase"

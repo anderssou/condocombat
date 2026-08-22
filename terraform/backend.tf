@@ -12,7 +12,7 @@ resource "render_web_service" "backend" {
 
   env_vars = {
     "DATABASE_URL" = {
-      value = "postgresql+asyncpg://postgres:${var.supabase_db_password}@db.${supabase_project.db.id}.supabase.co:5432/postgres"
+      value = "postgresql+asyncpg://postgres.${supabase_project.db.id}:${var.supabase_db_password}@aws-0-us-east-1.pooler.supabase.com:5432/postgres"
     }
     "SECRET_KEY" = {
       value = var.backend_secret_key

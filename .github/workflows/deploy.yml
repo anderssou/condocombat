@@ -41,7 +41,7 @@ jobs:
         working-directory: ./terraform
 
       - name: 📋 Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan -input=false -out=tfplan
         working-directory: ./terraform
         env:
           TF_VAR_dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}

@@ -7,11 +7,12 @@ on:
       - completed
     branches:
       - main
-        workflow_dispatch: {}
+  workflow_dispatch: {}
 
 jobs:
   terraform-deploy:
     name: 🏗️ Provisionar e Fazer Deploy da Infraestrutura
+    
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 

@@ -3,7 +3,7 @@ terraform {
   required_version = ">= 1.10.0"
 
     cloud {
-      organization = "SEU-ORG-AQUI"
+      organization = "anderssou-org"
     workspaces {
       name = "condocombat"
     }

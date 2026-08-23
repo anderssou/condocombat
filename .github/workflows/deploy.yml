@@ -15,6 +15,8 @@ jobs:
     
     if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    env:
+      TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
 
     steps:
       - name: 📥 Checkout do código
@@ -66,4 +68,3 @@ jobs:
           TF_VAR_backend_secret_key: ${{ secrets.BACKEND_SECRET_KEY }}
           TF_VAR_netlify_api_token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           TF_VAR_netlify_site_name: ${{ secrets.NETLIFY_SITE_NAME }}
-          TF_TOKEN_app_terraform_io: ${{ secrets.TF_API_TOKEN }}
